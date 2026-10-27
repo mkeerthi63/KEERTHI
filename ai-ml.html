@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI/ML portfolio of M Keerthi - machine learning pipelines, RAG applications with Llama 3.3, LangGraph and ChromaDB, model evaluation and deployment.">
+    <meta name="author" content="M Keerthi">
+    <meta property="og:title" content="M Keerthi | AI/ML Engineer Portfolio">
+    <meta property="og:description" content="Machine learning and RAG projects with measured results.">
+    <meta property="og:type" content="website">
+    <title>M Keerthi | AI/ML Engineer Portfolio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0b131f;
+            --bg-secondary: #111c2e;
+            --bg-card: #16243b;
+            --steel-blue: #3b6998;
+            --steel-blue-light: #5282b8;
+            --accent-blue: #00d2ff;
+            --accent-glow: rgba(0, 210, 255, 0.15);
+            --text-primary: #f0f4f8;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(82, 130, 184, 0.2);
+            --border-color-hover: rgba(0, 210, 255, 0.4);
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { background: var(--bg-primary); color: var(--text-primary); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; }
+        a { color: var(--accent-blue); text-decoration: none; }
+        a:hover { color: var(--steel-blue-light); }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+        header { position: sticky; top: 0; z-index: 10; background: rgba(11, 19, 31, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-color); }
+        .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+        .logo { display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 700; letter-spacing: 1px; }
+        .logo-badge { background: var(--steel-blue); color: #fff; border-radius: 8px; padding: 4px 8px; font-family: var(--font-code); font-size: 0.85rem; }
+        .nav-links { display: flex; gap: 22px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); font-size: 0.92rem; }
+        .nav-links a:hover { color: var(--accent-blue); }
+
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: var(--radius-md); font-weight: 600; font-size: 0.92rem; border: 1px solid var(--accent-blue); }
+        .btn-primary { background: var(--accent-blue); color: var(--bg-primary); }
+        .btn-primary:hover { background: transparent; color: var(--accent-blue); }
+        .btn-outline { color: var(--accent-blue); }
+        .btn-outline:hover { background: var(--accent-glow); color: var(--accent-blue); }
+
+        .hero { padding-top: 80px; padding-bottom: 56px; }
+        .tag { display: inline-block; font-family: var(--font-code); font-size: 0.85rem; color: var(--accent-blue); background: var(--accent-glow); border: 1px solid var(--border-color-hover); border-radius: 999px; padding: 4px 14px; margin-bottom: 18px; }
+        .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.15; }
+        .hero h2 { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-secondary); font-weight: 500; margin: 10px 0 18px; }
+        .hero p { max-width: 720px; color: var(--text-secondary); }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+        .socials { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; font-size: 0.92rem; }
+        .socials a { color: var(--text-secondary); }
+        .socials a:hover { color: var(--accent-blue); }
+
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 44px; }
+        .metric { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; }
+        .metric b { display: block; font-size: 1.6rem; color: var(--accent-blue); font-family: var(--font-code); }
+        .metric span { color: var(--text-secondary); font-size: 0.85rem; }
+
+        section { padding: 56px 0; }
+        section.alt { background: var(--bg-secondary); }
+        .section-title { font-size: 1.7rem; margin-bottom: 8px; }
+        .section-sub { color: var(--text-muted); margin-bottom: 30px; }
+
+        .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 470px), 1fr)); gap: 20px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; transition: border-color 0.3s, transform 0.3s; }
+        .card:hover { border-color: var(--border-color-hover); transform: translateY(-3px); }
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+        .card h3 { font-size: 1.15rem; }
+        .card-icon { color: var(--accent-blue); font-size: 1.3rem; }
+        .card .problem { color: var(--text-secondary); font-size: 0.93rem; margin-bottom: 12px; }
+        .card ul { padding-left: 18px; color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 14px; }
+        .card li { margin-bottom: 6px; }
+        .card li b { color: var(--text-primary); }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+        .chip { font-family: var(--font-code); font-size: 0.75rem; color: var(--steel-blue-light); border: 1px solid var(--border-color); border-radius: 6px; padding: 2px 8px; }
+        .card-links { margin-top: auto; display: flex; gap: 18px; font-size: 0.9rem; font-weight: 600; }
+
+        .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
+        .skill-group { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; }
+        .skill-group h4 { color: var(--accent-blue); margin-bottom: 10px; font-size: 0.95rem; }
+
+        .timeline-item { background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-blue); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 16px; }
+        .timeline-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; }
+        .timeline-item h4 { font-size: 1.02rem; }
+        .timeline-item .meta { color: var(--text-muted); font-size: 0.88rem; font-family: var(--font-code); }
+        .timeline-item .role { color: var(--text-secondary); font-style: italic; margin-bottom: 6px; }
+        .timeline-item ul { padding-left: 18px; color: var(--text-secondary); font-size: 0.92rem; }
+
+        footer { border-top: 1px solid var(--border-color); padding: 26px 0; color: var(--text-muted); font-size: 0.88rem; text-align: center; }
+
+        @media (max-width: 720px) {
+            .nav-links { display: none; }
+            .hero { padding-top: 48px; padding-bottom: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="#top" class="logo"><span class="logo-badge">MK</span> M KEERTHI</a>
+        <ul class="nav-links">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+        <a class="btn btn-outline" href="Keerthi/M_Keerthi_AI_ML_Resume.pdf" download><i class="fa-solid fa-download"></i> Resume</a>
+    </div>
+</header>
+
+<main id="top">
+    <div class="container hero">
+        <span class="tag">AI/ML Engineer · Hyderabad, India</span>
+        <h1>M Keerthi</h1>
+        <h2>Machine Learning &amp; RAG Applications · Python</h2>
+        <p>B.Tech CSE graduate (2026) who builds machine learning and Generative AI applications from start to finish: data preparation, feature engineering, model training, evaluation, tuning and deployment. Every number on this page comes from the linked code.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects"><i class="fa-solid fa-diagram-project"></i> View Projects</a>
+            <a class="btn btn-outline" href="Keerthi/M_Keerthi_AI_ML_Resume.pdf" download><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+        </div>
+        <div class="socials">
+            <a href="https://github.com/mkeerthi63" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/mkeerthi63</a>
+            <a href="https://linkedin.com/in/m-keerthi-4879a9284" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="mailto:mkeerthi63027@gmail.com"><i class="fa-solid fa-envelope"></i> mkeerthi63027@gmail.com</a>
+        </div>
+
+        <div class="metrics">
+            <div class="metric"><b>96.9%</b><span>RAG intent-routing accuracy (from 43.8%)</span></div>
+            <div class="metric"><b>91.7%</b><span>Retrieval Hit@1 on 32 labeled queries</span></div>
+            <div class="metric"><b>0.868</b><span>ROC-AUC, tuned Random Forest</span></div>
+            <div class="metric"><b>0.74</b><span>R² for chloride, water-quality model</span></div>
+        </div>
+    </div>
+
+    <section id="projects" class="alt">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-sub">Problem, approach and measured result for each.</p>
+            <div class="projects">
+
+                <article class="card">
+                    <div class="card-top"><h3>RAG Customer Support Assistant</h3><i class="fa-solid fa-robot card-icon"></i></div>
+                    <p class="problem">Answers customer questions about Zepto's delivery, refund, return, membership and gift-card policies, grounded only in 8 policy documents.</p>
+                    <ul>
+                        <li>Generates answers with <b>Llama 3.3 70B (Groq)</b>; output is validated against a Pydantic schema, retried with the validation error on failure, and cited sources are checked against what was retrieved.</li>
+                        <li>Embeds documents with all-MiniLM-L6-v2 in ChromaDB: <b>Hit@1 91.7%, Hit@3 100%, MRR 0.958</b> on 32 labeled queries.</li>
+                        <li>Found the keyword router misrouted paraphrased questions; a hybrid keyword + semantic LangGraph router raised accuracy from <b>43.8% to 96.9%</b>.</li>
+                        <li>FastAPI <code>/ask</code> endpoint, Docker image and 6 Pytest unit tests with a mocked LLM client.</li>
+                    </ul>
+                    <div class="chips"><span class="chip">Llama 3.3</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">Sentence Transformers</span><span class="chip">FastAPI</span><span class="chip">Docker</span></div>
+                    <div class="card-links"><a href="https://github.com/mkeerthi63/support_assistant" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a></div>
+                </article>
+
+                <article class="card">
+                    <div class="card-top"><h3>Survival Prediction ML Pipeline</h3><i class="fa-solid fa-chart-line card-icon"></i></div>
+                    <p class="problem">End-to-end classification pipeline on the 891-passenger Titanic dataset, from profiling to a serialized production pipeline.</p>
+                    <ul>
+                        <li>Median imputation for missing age (19.9% of rows), mode for categoricals, one-hot encoding and scaling in a ColumnTransformer.</li>
+                        <li>Compared Logistic Regression (ROC-AUC 0.852), Decision Tree (0.814) and Random Forest; tuned Random Forest reached <b>accuracy 82.6%, F1 0.754, ROC-AUC 0.868</b>.</li>
+                        <li>GridSearchCV with 5-fold CV on F1; <b>SMOTE</b> lifted recall from 0.70 to 0.74 versus the baseline.</li>
+                        <li>Fare regression side-model (MAE 18.87, RMSE 30.92) with residual analysis; full pipeline saved with joblib.</li>
+                    </ul>
+                    <div class="chips"><span class="chip">Scikit-learn</span><span class="chip">imbalanced-learn</span><span class="chip">Pandas</span><span class="chip">Matplotlib</span></div>
+                    <div class="card-links"><a href="https://github.com/mkeerthi63/Capstone_Project/tree/main/analytics" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a></div>
+                </article>
+
+                <article class="card">
+                    <div class="card-top"><h3>Water Quality Prediction</h3><i class="fa-solid fa-droplet card-icon"></i></div>
+                    <p class="problem">Predicts six pollutant levels for monitoring stations to support early pollution detection. Built during the Shell-sponsored AICTE internship.</p>
+                    <ul>
+                        <li>2,861 station records (2000&ndash;2021); engineered date features and one-hot encoded station IDs.</li>
+                        <li>MultiOutputRegressor wrapping RandomForestRegressor; <b>R² 0.74 on CL, 0.52 on NO3</b>.</li>
+                        <li>Per-target error analysis showed O2 and NO2 need features beyond station and year.</li>
+                        <li>Model saved with joblib and served through a Streamlit prediction app.</li>
+                    </ul>
+                    <div class="chips"><span class="chip">Scikit-learn</span><span class="chip">Pandas</span><span class="chip">Streamlit</span><span class="chip">Seaborn</span></div>
+                    <div class="card-links"><a href="https://github.com/mkeerthi63/Water-Quality-Prediction" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a></div>
+                </article>
+
+                <article class="card">
+                    <div class="card-top"><h3>Book Catalog ETL Pipeline</h3><i class="fa-solid fa-database card-icon"></i></div>
+                    <p class="problem">Automated pipeline that turns scraped web pages into a clean, queryable relational dataset.</p>
+                    <ul>
+                        <li>Scrapes book listings with retries and timeouts; cleans prices, ratings and stock status.</li>
+                        <li>Loads a normalized 2-table SQLite schema with primary and foreign keys.</li>
+                        <li>5 analytical SQL queries, with the JOIN results validated against Pandas <code>merge</code>.</li>
+                    </ul>
+                    <div class="chips"><span class="chip">BeautifulSoup</span><span class="chip">SQLite</span><span class="chip">SQL</span><span class="chip">Pandas</span></div>
+                    <div class="card-links"><a href="https://github.com/mkeerthi63/Capstone_Project/tree/main/data_pipeline" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Code</a></div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <p class="section-sub">Each one is used in at least one project above.</p>
+            <div class="skills">
+                <div class="skill-group"><h4>Machine Learning</h4><div class="chips"><span class="chip">Classification</span><span class="chip">Regression</span><span class="chip">Multi-Output Regression</span><span class="chip">Random Forest</span><span class="chip">Logistic Regression</span><span class="chip">SMOTE</span></div></div>
+                <div class="skill-group"><h4>Generative AI / NLP</h4><div class="chips"><span class="chip">RAG</span><span class="chip">LLMs (Llama 3.3)</span><span class="chip">Embeddings</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">Pydantic</span></div></div>
+                <div class="skill-group"><h4>Evaluation &amp; Tuning</h4><div class="chips"><span class="chip">GridSearchCV</span><span class="chip">Cross-Validation</span><span class="chip">ROC-AUC</span><span class="chip">F1</span><span class="chip">Hit@k / MRR</span><span class="chip">MAE / RMSE / R²</span></div></div>
+                <div class="skill-group"><h4>Data</h4><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">ETL</span><span class="chip">Feature Engineering</span></div></div>
+                <div class="skill-group"><h4>Deployment &amp; Tools</h4><div class="chips"><span class="chip">FastAPI</span><span class="chip">Docker</span><span class="chip">Streamlit</span><span class="chip">Pytest</span><span class="chip">Git</span><span class="chip">Jupyter</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="alt">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-sub">Most recent first.</p>
+            <div class="timeline-item">
+                <div class="timeline-head"><h4>KarbonWise</h4><span class="meta">Sep 2026 – Present · Hyderabad</span></div>
+                <div class="role">QA Automation Engineer Intern</div>
+                <ul>
+                    <li>Build Python test automation with Pytest, Selenium and Playwright for a carbon-accounting web app.</li>
+                    <li>Validate data-ingestion workflows (Inventory Upload, Client Templates) through functional, regression and smoke tests.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-head"><h4>AICTE Virtual Internship (Edunet, sponsored by Shell)</h4><span class="meta">Jun 2025 · Remote</span></div>
+                <div class="role">Machine Learning Intern</div>
+                <ul>
+                    <li>Built the Water Quality Prediction project end to end: cleaning, feature engineering, modeling, evaluation and Streamlit app.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <p class="section-sub">Most recent first.</p>
+            <div class="timeline-item">
+                <div class="timeline-head"><h4>Masai School</h4><span class="meta">2026</span></div>
+                <div class="role">Artificial Intelligence &amp; Machine Learning Program</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-head"><h4>CMR Institute of Technology, Hyderabad</h4><span class="meta">2022 – 2026</span></div>
+                <div class="role">B.Tech, Computer Science and Engineering · 80%</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">© 2026 M Keerthi · <a href="https://github.com/mkeerthi63">GitHub</a> · <a href="mailto:mkeerthi63027@gmail.com">Email</a></div>
+</footer>
+
+</body>
+</html>
